@@ -30,20 +30,22 @@ export class ListDoc {
     constructor(private iconService: IconService, private cd: ChangeDetectorRef) {}
 
     ngOnInit() {
-        // this.iconService.getIcons().subscribe((data) => {
-        //     data = data.filter((value) => {
-        //         return value.icon.tags.indexOf('deprecate') === -1;
-        //     });
-        //     let icons = data;
-        //     icons.sort((icon1, icon2) => {
-        //         if (icon1.properties.name < icon2.properties.name) return -1;
-        //         else if (icon1.properties.name < icon2.properties.name) return 1;
-        //         else return 0;
-        //     });
-        //     this.icons = icons;
-        //     this.filteredIcons = data;
-        //     this.cd.markForCheck();
-        // });
+        this.iconService.getIcons().subscribe((data) => {
+            data = data.filter((value) => {
+                return value.icon.tags.indexOf('deprecate') === -1;
+            });
+
+            let icons = data;
+            icons.sort((icon1, icon2) => {
+                if (icon1.properties.name < icon2.properties.name) return -1;
+                else if (icon1.properties.name < icon2.properties.name) return 1;
+                else return 0;
+            });
+
+            this.icons = icons;
+            this.filteredIcons = data;
+            this.cd.markForCheck();
+        });
     }
 
     onFilter(event: KeyboardEvent): void {
