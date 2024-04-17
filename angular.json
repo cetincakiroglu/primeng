@@ -28,11 +28,11 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "outputPath": "dist/primeng",
                         "index": "src/index.html",
-                        "main": "src/main.ts",
+                        "browser": "src/main.ts",
                         "polyfills": [
                             "zone.js"
                         ],
@@ -45,19 +45,36 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "./node_modules/prismjs/prism.js",
+                            "./node_modules/prismjs/components/prism-typescript.js",
+                            "./node_modules/prismjs/components/prism-scss.js",
+                            "./node_modules/prismjs/components/prism-bash.js"
+                        ],
+                        "allowedCommonJsDependencies": [
+                            "chart.js",
+                            "xlsx",
+                            "jspdf-autotable",
+                            "file-saver",
+                            "jspdf",
+                            "quill",
+                            "core-js",
+                            "raf",
+                            "rgbcolor"
+                        ],
+                        "server": "src/main.server.ts",
+                        "ssr": {
+                            "entry": "server.ts"
+                        }
                     },
                     "configurations": {
                         "production": {
                             "outputHashing": "all"
                         },
                         "development": {
-                            "buildOptimizer": false,
                             "optimization": false,
-                            "vendorChunk": true,
                             "extractLicenses": false,
-                            "sourceMap": true,
-                            "namedChunks": true
+                            "sourceMap": true
                         }
                     },
                     "defaultConfiguration": "production"
@@ -88,7 +105,6 @@
                             "zone.js/testing"
                         ],
                         "tsConfig": "tsconfig.spec.json",
-                        "karmaConfig": "karma.conf.js",
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
