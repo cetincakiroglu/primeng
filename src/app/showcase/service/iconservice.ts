@@ -11,20 +11,20 @@ export class IconService {
 
     selectedIcon: any;
 
-    apiUrl = 'assets/showcase/data/icons.json';
+    // apiUrl = 'assets/showcase/data/icons.json';
 
-    getBaseUrl() {
-        return `${this.document.location.protocol}//${this.document.location.host}/`;
-    }
+    // getBaseUrl() {
+    //     return `${this.document.location.protocol}//${this.document.location.host}/`;
+    // }
 
-    getIcons() {
-        const apiUrl = this.getBaseUrl() + this.apiUrl;
+    // getIcons() {
+    //     const apiUrl = this.getBaseUrl() + this.apiUrl;
 
-        return this.http.get(apiUrl).pipe(
-            map((response: any) => {
-                this.icons = response.icons;
-                return this.icons;
-            })
-        );
-    }
+    //     return this.http.get(apiUrl).pipe(
+    //         map((response: any) => {
+    //             this.icons = response.icons;
+    //             return this.icons;
+    //         })
+    //     );
+    // }
 }
