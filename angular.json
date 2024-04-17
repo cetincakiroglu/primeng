@@ -32,7 +32,7 @@
                     "options": {
                         "outputPath": "dist/primeng",
                         "index": "src/index.html",
-                        "browser": "src/main.ts",
+                        "main": "src/main.ts",
                         "polyfills": [
                             "zone.js"
                         ],
@@ -45,26 +45,22 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": [
-                            "./node_modules/prismjs/prism.js",
-                            "./node_modules/prismjs/components/prism-typescript.js",
-                            "./node_modules/prismjs/components/prism-scss.js",
-                            "./node_modules/prismjs/components/prism-bash.js"
-                        ],
-                        "allowedCommonJsDependencies": [
-                            "chart.js",
-                            "xlsx",
-                            "jspdf-autotable",
-                            "file-saver",
-                            "jspdf",
-                            "quill",
-                            "core-js",
-                            "raf",
-                            "rgbcolor"
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "1mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "2kb",
+                                    "maximumError": "4kb"
+                                }
+                            ],
                             "outputHashing": "all"
                         },
                         "development": {
@@ -104,6 +100,7 @@
                             "zone.js/testing"
                         ],
                         "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "karma.conf.js",
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
