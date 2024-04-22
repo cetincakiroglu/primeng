@@ -7,10 +7,5 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
-    providers: [
-        provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }), withEnabledBlockingInitialNavigation()),
-        provideHttpClient(withFetch()),
-        provideAnimationsAsync(),
-        provideClientHydration()
-    ]
+    providers: [provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }), withEnabledBlockingInitialNavigation()), provideHttpClient(withFetch()), provideAnimationsAsync()]
 };
