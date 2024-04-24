@@ -169,6 +169,9 @@ export class DropdownItem {
                 [attr.aria-label]="ariaLabel || (label() === 'p-emptylabel' ? undefined : label())"
                 (input)="onEditableInput($event)"
                 (keydown)="onKeyDown($event)"
+                pAutoFocus
+                [autofocus]="autofocus"
+                [attr.aria-activedescendant]="focused ? focusedOptionId : undefined"
                 (focus)="onInputFocus($event)"
                 (blur)="onInputBlur($event)"
             />
@@ -243,7 +246,7 @@ export class DropdownItem {
                                 </div>
                             </ng-template>
                         </div>
-                        <div class="p-dropdown-items-wrapper" [style.max-height]="virtualScroll ? 'auto' : scrollHeight || 'auto'">
+                        <div class="p-dropdown-items-wrapper" [style.max-height]="virtualScroll ? 'auto' : scrollHeight || 'auto'" role="section">
                             <p-scroller
                                 *ngIf="virtualScroll"
                                 #scroller

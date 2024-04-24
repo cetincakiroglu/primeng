@@ -38,6 +38,7 @@ import { TimesIcon } from 'primeng/icons/times';
 import { CalendarIcon } from 'primeng/icons/calendar';
 import { Nullable, VoidListener } from 'primeng/ts-helpers';
 import { NavigationState, CalendarResponsiveOptions, CalendarTypeView, LocaleSettings, Month, CalendarMonthChangeEvent, CalendarYearChangeEvent } from './calendar.interface';
+import { AutoFocusModule } from 'primeng/autofocus';
 
 export const CALENDAR_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -94,6 +95,8 @@ export const CALENDAR_VALUE_ACCESSOR: any = {
                     [attr.inputmode]="touchUI ? 'off' : null"
                     [ngClass]="'p-inputtext p-component'"
                     autocomplete="off"
+                    pAutoFocus
+                    [autofocus]="autofocus"
                 />
                 <ng-container *ngIf="showClear && !disabled && value != null">
                     <TimesIcon *ngIf="!clearIconTemplate" [styleClass]="'p-calendar-clear-icon'" (click)="clear()" />
@@ -676,6 +679,11 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
      * @group Props
      */
     @Input() clearButtonStyleClass: string = 'p-button-text';
+    /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @group Props
+     */
+    @Input({ transform: booleanAttribute }) autofocus: boolean | undefined;
     /**
      * Whether to automatically manage layering.
      * @group Props
@@ -1987,8 +1995,12 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
                 if (this.inline) {
                     const headerElements = DomHandler.findSingle(this.containerViewChild?.nativeElement, '.p-datepicker-header');
                     const element = event.target;
-                    if (element == headerElements.children[headerElements.children.length - 1]) {
-                        this.initFocusableCell();
+                    if (this.timeOnly) {
+                        return;
+                    } else {
+                        if (element == headerElements.children[headerElements?.children?.length - 1]) {
+                            this.initFocusableCell();
+                        }
                     }
                 }
                 break;
@@ -3530,7 +3542,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
 }
 
 @NgModule({
-    imports: [CommonModule, ButtonModule, SharedModule, RippleModule, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, ChevronDownIcon, TimesIcon, CalendarIcon],
+    imports: [CommonModule, ButtonModule, SharedModule, RippleModule, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, ChevronDownIcon, TimesIcon, CalendarIcon, AutoFocusModule],
     exports: [Calendar, ButtonModule, SharedModule],
     declarations: [Calendar]
 })

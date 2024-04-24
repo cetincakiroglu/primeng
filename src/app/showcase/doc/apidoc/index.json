@@ -4456,33 +4456,19 @@
                     "description": "Defines the input properties of the component.",
                     "values": [
                         {
-                            "name": "iconPos",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "\"left\" | \"top\" | \"bottom\" | \"right\"",
-                            "default": "left",
-                            "description": "Icon position of the component."
-                        },
-                        {
                             "name": "disabled",
                             "optional": false,
                             "readonly": false,
                             "type": "boolean",
+                            "default": "false",
                             "description": "When specified, disables the component."
                         },
                         {
-                            "name": "size",
+                            "name": "badgeSize",
                             "optional": false,
                             "readonly": false,
                             "type": "\"large\" | \"xlarge\"",
                             "description": "Size of the badge, valid options are \"large\" and \"xlarge\"."
-                        },
-                        {
-                            "name": "value",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Value to display inside the badge."
                         },
                         {
                             "name": "severity",
@@ -4490,6 +4476,13 @@
                             "readonly": false,
                             "type": "\"success\" | \"info\" | \"warning\" | \"danger\"",
                             "description": "Severity type of the badge."
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string | number",
+                            "description": "Value to display inside the badge."
                         }
                     ]
                 }
@@ -4514,7 +4507,7 @@
                             "description": "Inline style of the element."
                         },
                         {
-                            "name": "size",
+                            "name": "badgeSize",
                             "optional": false,
                             "readonly": false,
                             "type": "\"large\" | \"xlarge\"",
@@ -4531,7 +4524,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "string",
+                            "type": "string | number",
                             "description": "Value to display inside the badge."
                         },
                         {
@@ -4976,6 +4969,14 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Used to define a string that autocomplete attribute the current element."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -5368,6 +5369,14 @@
                             "type": "string",
                             "default": "p-button-text",
                             "description": "Style class of the clear button."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
                             "name": "autoZIndex",
@@ -6535,6 +6544,14 @@
                             "description": "Whether to use overlay API feature. The properties of overlay API can be used like an object in it."
                         },
                         {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
+                        {
                             "name": "showTransitionOptions",
                             "optional": false,
                             "readonly": false,
@@ -7056,6 +7073,14 @@
                             "description": "When present, it specifies that checkbox must be checked before submitting the form."
                         },
                         {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
+                        {
                             "name": "trueValue",
                             "optional": false,
                             "readonly": false,
@@ -7409,6 +7434,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, a clear icon is displayed to clear the value."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -7684,6 +7717,14 @@
                             "type": "string",
                             "default": ".1s linear",
                             "description": "Transition options of the hide animation."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -9084,7 +9125,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "true",
-                            "description": "When enabled, first button receives focus on show."
+                            "description": "When enabled, first focusable element receives focus on show."
                         },
                         {
                             "name": "maximizable",
@@ -10472,6 +10513,14 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Specifies if autofocus should happen on show."
+                        },
+                        {
+                            "name": "focusTrap",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, can only focus on elements inside the dialog."
                         },
                         {
                             "name": "baseZIndex",
@@ -13017,12 +13066,20 @@
                             "description": "Regex pattern for alpha characters"
                         },
                         {
-                            "name": "autoFocus",
+                            "name": "autofocus",
                             "optional": false,
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
                             "description": "When present, the input gets a focus automatically on load."
+                        },
+                        {
+                            "name": "autoFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": null,
+                            "description": "When present, the input gets a focus automatically on load.",
+                            "deprecated": "Use autofocus property instead."
                         },
                         {
                             "name": "autocomplete",
@@ -13432,6 +13489,14 @@
                             "description": "When enabled, a clear icon is displayed to clear the value."
                         },
                         {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
+                        {
                             "name": "disabled",
                             "optional": false,
                             "readonly": false,
@@ -13626,6 +13691,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When present, it specifies that an input field is integer-only."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -13840,6 +13913,14 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -15500,6 +15581,45 @@
                         "description": "Custom icon template."
                     }
                 ]
+            },
+            "interfaces": {
+                "description": "Defines the custom interfaces used by the module.",
+                "values": [
+                    {
+                        "name": "MeterItem",
+                        "description": "Represents a meter item configuration.",
+                        "props": [
+                            {
+                                "name": "label",
+                                "optional": true,
+                                "readonly": false,
+                                "type": "string",
+                                "description": "Label of the meter item."
+                            },
+                            {
+                                "name": "value",
+                                "optional": true,
+                                "readonly": false,
+                                "type": "number",
+                                "description": "Value of the meter item."
+                            },
+                            {
+                                "name": "color",
+                                "optional": true,
+                                "readonly": false,
+                                "type": "string",
+                                "description": "Color of the meter item."
+                            },
+                            {
+                                "name": "icon",
+                                "optional": true,
+                                "readonly": false,
+                                "type": "string",
+                                "description": "Icon of the meter item."
+                            }
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -15890,6 +16010,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, a clear icon is displayed to clear the value."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
                             "name": "autoZIndex",
@@ -18263,6 +18391,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, a clear icon is displayed to clear the value."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -19338,6 +19474,14 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Style class of the label."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -19497,6 +19641,14 @@
                             "readonly": false,
                             "type": "Object",
                             "description": "Inline style of the cancel icon."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -20417,6 +20569,14 @@
                             "readonly": false,
                             "type": "string",
                             "description": "A property to uniquely identify a value in options."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -20810,7 +20970,7 @@
                             "name": "effectDuration",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "number",
                             "default": "250",
                             "description": "Duration of the sliding animation in milliseconds."
                         },
@@ -21127,6 +21287,14 @@
                             "type": "number",
                             "default": "0",
                             "description": "Index of the element in tabbing order."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -21622,6 +21790,14 @@
                             "type": "string",
                             "default": ".1s linear",
                             "description": "Transition options of the hide animation."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
                             "name": "_menuButtonDisabled",
@@ -22643,8 +22819,7 @@
                             "name": "rowSelectable",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
-                            "description": "Defines if the row is selectable."
+                            "type": "Function"
                         },
                         {
                             "name": "rowTrackBy",
@@ -25481,6 +25656,14 @@
                             "type": "\"left\" | \"right\"",
                             "default": "left",
                             "description": "Position of the icon."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },
@@ -26722,6 +26905,14 @@
                             "readonly": false,
                             "type": "ScrollerOptions",
                             "description": "Whether to use the scroller feature. The properties of scroller component can be used like an object in it."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
                             "name": "options",
@@ -28581,6 +28772,14 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Specifies the icon for checkbox false value."
+                        },
+                        {
+                            "name": "autofocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         }
                     ]
                 },

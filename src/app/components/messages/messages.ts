@@ -42,7 +42,7 @@ import { Subscription, timer } from 'rxjs';
                     role="alert"
                     [@messageAnimation]="{ value: 'visible', params: { showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions } }"
                 >
-                    <div class="p-message-wrapper" [attr.data-pc-section]="'wrapper'">
+                    <div class="p-message-wrapper" [attr.data-pc-section]="'wrapper'" [attr.id]="msg.id || null">
                         <span *ngIf="msg.icon" [class]="'p-message-icon pi ' + msg.icon" [attr.data-pc-section]="'icon'"> </span>
                         <span class="p-message-icon" *ngIf="!msg.icon">
                             <ng-container>
@@ -60,7 +60,7 @@ import { Subscription, timer } from 'rxjs';
                             <span *ngIf="msg.summary" class="p-message-summary" [attr.data-pc-section]="'summary'">{{ msg.summary }}</span>
                             <span *ngIf="msg.detail" class="p-message-detail" [attr.data-pc-section]="'detail'">{{ msg.detail }}</span>
                         </ng-template>
-                        <button class="p-message-close p-link" (click)="removeMessage(i)" *ngIf="closable" type="button" pRipple [attr.aria-label]="closeAriaLabel" [attr.data-pc-section]="'closebutton'">
+                        <button class="p-message-close p-link" (click)="removeMessage(i)" *ngIf="closable && (msg.closable ?? true)" type="button" pRipple [attr.aria-label]="closeAriaLabel" [attr.data-pc-section]="'closebutton'">
                             <TimesIcon [styleClass]="'p-message-close-icon'" [attr.data-pc-section]="'closeicon'" />
                         </button>
                     </div>
@@ -225,8 +225,9 @@ export class Messages implements AfterContentInit, OnDestroy {
     }
 
     removeMessage(i: number) {
+        const removedMessage = this.messages[i];
         this.messages = this.messages?.filter((msg, index) => index !== i);
-        this.messages[i] && this.onClose.emit(this.messages[i]);
+        removedMessage && this.onClose.emit(removedMessage);
         this.valueChange.emit(this.messages);
     }
 

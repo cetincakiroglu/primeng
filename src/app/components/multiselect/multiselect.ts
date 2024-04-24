@@ -45,6 +45,7 @@ import { TimesCircleIcon } from 'primeng/icons/timescircle';
 import { TimesIcon } from 'primeng/icons/times';
 import { ChevronDownIcon } from 'primeng/icons/chevrondown';
 import { Nullable } from 'primeng/ts-helpers';
+import { AutoFocusModule } from 'primeng/autofocus';
 import { MultiSelectRemoveEvent, MultiSelectFilterOptions, MultiSelectFilterEvent, MultiSelectBlurEvent, MultiSelectChangeEvent, MultiSelectFocusEvent, MultiSelectLazyLoadEvent, MultiSelectSelectAllChangeEvent } from './multiselect.interface';
 
 export const MULTISELECT_VALUE_ACCESSOR: any = {
@@ -70,11 +71,12 @@ export const MULTISELECT_VALUE_ACCESSOR: any = {
             [attr.data-p-focused]="focused"
             [attr.data-p-highlight]="selected"
             [attr.data-p-disabled]="disabled"
+            [attr.aria-checked]="selected"
             (click)="onOptionClick($event)"
             (mouseenter)="onOptionMouseEnter($event)"
         >
             <div class="p-checkbox p-component">
-                <div class="p-checkbox-box" [ngClass]="{ 'p-highlight': selected }" [attr.aria-checked]="selected">
+                <div class="p-checkbox-box" [ngClass]="{ 'p-highlight': selected }">
                     <ng-container *ngIf="selected">
                         <CheckIcon *ngIf="!checkIconTemplate" [styleClass]="'p-checkbox-icon'" [attr.aria-hidden]="true" />
                         <span *ngIf="checkIconTemplate" class="p-checkbox-icon" [attr.aria-hidden]="true">
@@ -164,6 +166,8 @@ export class MultiSelectItem {
                     (focus)="onInputFocus($event)"
                     (blur)="onInputBlur($event)"
                     (keydown)="onKeyDown($event)"
+                    pAutoFocus
+                    [autofocus]="autofocus"
                 />
             </div>
             <div class="p-multiselect-label-container" [pTooltip]="tooltip" [tooltipPosition]="tooltipPosition" [positionStyle]="tooltipPositionStyle" [tooltipStyleClass]="tooltipStyleClass">
@@ -667,6 +671,11 @@ export class MultiSelect implements OnInit, AfterViewInit, AfterContentInit, Aft
      * @group Props
      */
     @Input({ transform: booleanAttribute }) showClear: boolean = false;
+    /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @group Props
+     */
+    @Input({ transform: booleanAttribute }) autofocus: boolean | undefined;
     /**
      * @deprecated since v14.2.0, use overlayOptions property instead.
      * Whether to automatically manage layering.
@@ -1950,6 +1959,9 @@ export class MultiSelect implements OnInit, AfterViewInit, AfterContentInit, Aft
         if (this.filter && this.resetFilterOnHide) {
             this.resetFilter();
         }
+        if (this.overlayOptions?.mode === 'modal') {
+            DomHandler.unblockBodyScroll();
+        }
 
         isFocus && DomHandler.focus(this.focusInputViewChild?.nativeElement);
         this.onPanelHide.emit();
@@ -2148,7 +2160,7 @@ export class MultiSelect implements OnInit, AfterViewInit, AfterContentInit, Aft
 }
 
 @NgModule({
-    imports: [CommonModule, OverlayModule, SharedModule, TooltipModule, RippleModule, ScrollerModule, CheckIcon, SearchIcon, TimesCircleIcon, TimesIcon, ChevronDownIcon, CheckIcon],
+    imports: [CommonModule, OverlayModule, SharedModule, TooltipModule, RippleModule, ScrollerModule, AutoFocusModule, CheckIcon, SearchIcon, TimesCircleIcon, TimesIcon, ChevronDownIcon, CheckIcon],
     exports: [MultiSelect, OverlayModule, SharedModule, ScrollerModule],
     declarations: [MultiSelect, MultiSelectItem]
 })
